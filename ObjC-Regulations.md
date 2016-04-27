@@ -7,33 +7,37 @@
 # 作者感言
 
 > 这篇文章, 部分是收集了网上的iOS开发爱好者的代码规范, 以及我自己的理解, 不一定完全满足所有人, 希望多多见谅, 也同样感谢支持我完成这篇文章的朋友.
-> 
+>
 > 刚开始写这篇文章的时候, 我无从下手, 直到我朋友给了我一份JAVA的开发文档规范, 我才慢慢有了清晰的思路, 中间迭代了许多版本, 一次次的修改文章的排版, 关键字的高亮, 以及代码的高亮.
-> 
+>
 > 一点点的编写, 一次次的修改, 让我对代码规范有了更深刻的理解, 曾经有人说过, 印度人写代码, 100个人所写的, 看起来像一个人所写的, 不是说印度阿三开挂了, 是他们遵循了一个规范, 无规矩不成方圆, 也就是这个道理.
 
 
-> **<font color=purple>最后:</font>**
-> **<font color=purple>如果你有更好的建议或者对这篇文章有不满的地方, 请联系我, 我会参考你们的意见再进行修改, 联系我时, 请备注`iOS代码规范文档`, 祝大家学习愉快~谢谢~</font>**
 
-Cain(罗家辉)
-联系方式: zhebushimengfei@qq.com
-腾讯QQ: 350116542
+> **最后:**
+> **如果你有更好的建议或者对这篇文章有不满的地方, 请联系我, 我会参考你们的意见再进行修改, 联系我时, 请备注`iOS代码规范文档`, 祝大家学习愉快~谢谢~**
+
+联系方式:
+
+* **Cain(罗家辉)**
+
+
+* **联系方式:** zhebushimengfei@qq.com
+
+
+* **腾讯QQ:** 350116542
 
 ---
 # 阅读前言
-@(Reading Preface)
 
----
 * 在阅读代码规范之前，必须先去下载两个插件<**[XAlign](https://github.com/qfish/XAlign)**, **[VVDocumenter](https://github.com/onevcat/VVDocumenter-Xcode)**>。
 * 文档的目的是描述一些关于iOS编程的标准和惯例，并指导编写稳定的iOS代码。这些都是基于健全的、充分证明过的软件工程基础上的，并使得代码容易理解、维护和增。更重要的是，遵循这些规则，iOS开发人员的编程效率将会显著的得到提高。因为不必花费时间来重新编写代码，而是更容易的在开发过程中，对代码进行修改。最后，遵循这些规则，可以保持代码的连续性和粘性，提升开发组的效率。
 
 ---
 # iOS代码规范
 
-@(Code)[Standard]
 
----
+
 ## #Import规范
 
 1. 当一个**`Controller`**或者一个**`Class`**中需要用到不同的类和**`Define`**时, 我们应当把**`#import`**划分.
@@ -58,7 +62,7 @@ Cain(罗家辉)
 
 ## #Define规范
 
-1. 使用**`#define`**时, 必须要以数值对齐.
+* 使用**`#define`**时, 必须要以数值对齐.
 
 比如:
 ```objective-c
@@ -77,22 +81,7 @@ Cain(罗家辉)
 ```
 ---
 
-1. 使用**`#define`**定义预编译宏时, 应当把宏定义成全部大写字母, 且与**`“_”`**分隔, 此方法是苹果官方所推荐.
-
-
-比如:
-```objective-c
-#define NS_AVAILABLE(_mac, _ios) CF_AVAILABLE(_mac, _ios)
-#define NS_AVAILABLE_MAC(_mac) CF_AVAILABLE_MAC(_mac)
-#define NS_AVAILABLE_IOS(_ios) CF_AVAILABLE_IOS(_ios)
-```
-错误写法:
-```objective-c
-#define kCancelBottom  25
-#define kCancelHeight  44
-#define kCancelMargins 25
-```
-1.	在代码中尽量减少在代码中直接使用数字敞亮, 而使用**`#define`**来进行声明常量或运算.
+* 在代码中尽量减少在代码中直接使用数字敞亮, 而使用**`#define`**来进行声明常量或运算.
 
 比如:
 ```objectivec
@@ -108,7 +97,7 @@ Cain(罗家辉)
     self.tableView.frame = CGRectMake(0, 64, 320, 660);
 }
 ```
-1.	尽量代码中得重复计算, 比如在代码中很多地方需要使用到屏幕的宽度, 然后再进行计算, 我们就可以把屏幕的宽度进行抽取封装成**`#define`**.
+* 尽量代码中得重复计算, 比如在代码中很多地方需要使用到屏幕的宽度, 然后再进行计算, 我们就可以把屏幕的宽度进行抽取封装成**`#define`**.
 
 比如:
 ```objective-c
@@ -133,7 +122,7 @@ Cain(罗家辉)
 ---
 ## #Paragma Mark 规范
 
-1. 使用**`#pragma mark`**时紧挨着方法名, 且与上一个方法的间距为1空行.
+* 使用**`#pragma mark`**时紧挨着方法名, 且与上一个方法的间距为1空行.
 
 比如:
 ``` objective-c
@@ -175,7 +164,7 @@ Cain(罗家辉)
 }
 ```
 ---
-1. 当两个方法相近或者都是同一个模块里的方法, 使用**`#pragma mark`**加注释来导航代码.
+* 当两个方法相近或者都是同一个模块里的方法, 使用**`#pragma mark`**加注释来导航代码.
 
 比如:
 
@@ -201,7 +190,7 @@ Cain(罗家辉)
 ---
 ## @Interface规范
 
-1. 当**`@interface`**里声明了许多**`Delegate`**, **`DataSource`**, **`Protocol`**方法时, 我们需要在**`“Class Name()”`**及**`“,”`**后空一格, 且以第一个**`Delegate(DataSource或Protocol)`**方法名对齐, 建议在4~5个之后就换行.
+* 当**`@interface`**里声明了许多**`Delegate`**, **`DataSource`**, **`Protocol`**方法时, 我们需要在**`“Class Name()”`**及**`“,”`**后空一格, 且以第一个**`Delegate(DataSource或Protocol)`**方法名对齐, 建议在4~5个之后就换行.
 
 比如:
 
@@ -216,7 +205,7 @@ UITextViewDelegate>
 interface AspEasyOwnResetPasswordViewController()<UITextFieldDelegate,MBAlertViewDelegate>
 ```
 ---
-1. 当我们在**`@interface`**里声明变量时, 我们应该根据内存管理关键字来划分模块, 且以 **`“*”`** 分类对齐(基础数据类型除外).
+* 当我们在**`@interface`**里声明变量时, 我们应该根据内存管理关键字来划分模块, 且以 **`“*”`** 分类对齐(基础数据类型除外).
 
 比如:
 ```objective-c
@@ -245,7 +234,7 @@ interface AspEasyOwnResetPasswordViewController()<UITextFieldDelegate,MBAlertVie
 ```
 
 ---
-1. 在**`@interface`**里声明**`@property`**需要把**`nonatomic`**放在前**`(使用xib的除外)`**, **`strong`**等内存关键字放在后, 且**`“()”`**前后各空一格.
+* 在**`@interface`**里声明**`@property`**需要把**`nonatomic`**放在前**`(使用xib的除外)`**, **`strong`**等内存关键字放在后, 且**`“()”`**前后各空一格.
 
 比如:
 ```objective-c
@@ -262,7 +251,7 @@ interface AspEasyOwnResetPasswordViewController()<UITextFieldDelegate,MBAlertVie
 ---
 ## @implementation规范
 
-1. 禁止使用**`@synthesize`**关键字, **`@property`**已经自动帮我们声明了**`Setter`**和**`Getter`**方法, 如有特殊需求可重写**`Setter`**方法, 所以不需要再使用**`@synthesize`**.
+* 禁止使用**`@synthesize`**关键字, **`@property`**已经自动帮我们声明了**`Setter`**和**`Getter`**方法, 如有特殊需求可重写**`Setter`**方法, 所以不需要再使用**`@synthesize`**.
 
 错误写法:
 ```objective-c
@@ -278,7 +267,7 @@ interface AspEasyOwnResetPasswordViewController()<UITextFieldDelegate,MBAlertVie
 ---
 ## 实例规范
 
-1. 一个实例变量出现属性赋值时, 如果是以**`“=”`**赋值, 必须以**`“=”`**对齐, 如果以**`“[]”`**赋值, 必须以开头第一个**`“[”`**对齐.
+* 一个实例变量出现属性赋值时, 如果是以**`“=”`**赋值, 必须以**`“=”`**对齐, 如果以**`“[]”`**赋值, 必须以开头第一个**`“[”`**对齐.
 
 比如:
 ```objective-c
@@ -315,7 +304,7 @@ interface AspEasyOwnResetPasswordViewController()<UITextFieldDelegate,MBAlertVie
 ```
 
 ---
-1. 当出现多个实例变量时, 应该使用代码块的思想**`(特殊情况除外)`**, 把它们组成一个模块一个模块.
+* 当出现多个实例变量时, 应该使用代码块的思想**`(特殊情况除外)`**, 把它们组成一个模块一个模块.
 
 比如:
 
@@ -369,7 +358,7 @@ interface AspEasyOwnResetPasswordViewController()<UITextFieldDelegate,MBAlertVie
 
 ---
 
-1. 在制类型转换时, 函数与函数之间不放置空格.
+* 在制类型转换时, 函数与函数之间不放置空格.
 
 比如:
 ```objective-c
@@ -382,7 +371,7 @@ NSString *userName = (NSString *) student;
 ---
 ## NSDictionary规范
 
-1.当**`NSDictionary`**里的**`Key`** : **`Value`**过多时, 应拆分为多行显示, 并以 **`":"`** 对齐.
+* 当**`NSDictionary`**里的**`Key`** : **`Value`**过多时, 应拆分为多行显示, 并以 **`":"`** 对齐.
 
 比如:
 ```objective-c
@@ -398,7 +387,7 @@ NSDictionary *people = @{@"xiaoming":18,@"xiaohong":19,@"xiaowang":20};
 ---
 ## NSArray规范
 
-1.当**`NSArray`**里的元素过多时, 应拆分为多行显示, 并以第一个元素对齐.
+* 当**`NSArray`**里的元素过多时, 应拆分为多行显示, 并以第一个元素对齐.
 
 比如:
 ```objective-c
@@ -414,7 +403,7 @@ NSArray *nameArray = @[@"小明",@"小红",@"小王"];
 ---
 ## 函数规范
 
-1. 在声明函数时**`“-”`**与**`“(type)”`**必须空一格, 且后面的参数类型与**`“*”`**也必须空一格.
+* 在声明函数时**`“-”`**与**`“(type)”`**必须空一格, 且后面的参数类型与**`“*”`**也必须空一格.
 
 比如:
 ```objective-c
@@ -436,7 +425,7 @@ NSArray *nameArray = @[@"小明",@"小红",@"小王"];
 ```
 
 ---
-1. 方法与方法之间相隔一行的间距, 禁止不空行或多空行. 
+* 方法与方法之间相隔一行的间距, 禁止不空行或多空行. 
 
 比如:
 ```objective-c
@@ -481,7 +470,7 @@ NSArray *nameArray = @[@"小明",@"小红",@"小王"];
 }
 ```
 ---
-1. 在每个方法定义前需要留白一行, 也就是每个方法之间留空一行, 如果是系统的方法则可以不留空.
+* 在每个方法定义前需要留白一行, 也就是每个方法之间留空一行, 如果是系统的方法则可以不留空.
 
 比如:
 ```objective-c
@@ -500,7 +489,7 @@ NSArray *nameArray = @[@"小明",@"小红",@"小王"];
 ```
 
 ---
-1. 在函数体内, 如果第一句调用的是系统方法, 可不换行, 如果是自定义的方法**`(包括if-else和for-in)`**, 必须换行.
+* 在函数体内, 如果第一句调用的是系统方法, 可不换行, 如果是自定义的方法**`(包括if-else和for-in)`**, 必须换行.
 
 比如:
 ```objective-c
@@ -524,7 +513,7 @@ NSArray *nameArray = @[@"小明",@"小红",@"小王"];
 }
 ```
 ---
-1. 在函数体里, 无论是什么结束, 都无需换行, 直接与**`“}”`**紧挨.
+* 在函数体里, 无论是什么结束, 都无需换行, 直接与**`“}”`**紧挨.
 
 比如:
 ``` objective-c
@@ -541,7 +530,7 @@ NSArray *nameArray = @[@"小明",@"小红",@"小王"];
 }
 ```
 ---
-1. 任意行代码不能超过80个字符, 如果超过80个字符, 可以考虑多行显示, 比如有多个参数时, 可以每个参数放一行.
+* 任意行代码不能超过80个字符, 如果超过80个字符, 可以考虑多行显示, 比如有多个参数时, 可以每个参数放一行.
 
 比如: 
 ``` objective-c
@@ -552,7 +541,7 @@ NSArray *nameArray = @[@"小明",@"小红",@"小王"];
 ---
 ## If-Else规范
 
-1. 如果在方法中出现**`if-else`**判断, 我们应该使用结构清晰的排版方式, **`if-else`**语句与方法名空行, 与**`return`**语句可以不用空行.
+* 如果在方法中出现**`if-else`**判断, 我们应该使用结构清晰的排版方式, **`if-else`**语句与方法名空行, 与**`return`**语句可以不用空行.
 
 比如:
 
@@ -574,7 +563,7 @@ NSArray *nameArray = @[@"小明",@"小红",@"小王"];
 	return self;
 }
 ```
-1. **`if-else`**内部也必须跟着空行, 在**`else`**之后的**`"}"`**可不空行.
+* **`if-else`**内部也必须跟着空行, 在**`else`**之后的**`"}"`**可不空行.
 
 比如:
 ```objective-c
@@ -597,7 +586,7 @@ NSArray *nameArray = @[@"小明",@"小红",@"小王"];
 	}
 }
 ```
-1. **`if-else`**超过四层的时候, 就要考虑重构, 多层的**`if-else`**结构很难维护.
+* **`if-else`**超过四层的时候, 就要考虑重构, 多层的**`if-else`**结构很难维护.
 
 比如:
 ```objective-c
@@ -635,7 +624,7 @@ NSArray *nameArray = @[@"小明",@"小红",@"小王"];
 }
 ```
 
-1. 合理使用**`if-else`**, 当某个场景只需满足一个条件才能进入**`if-else`**时, 应该把**`if-else`**抽成一个模块.
+* 合理使用**`if-else`**, 当某个场景只需满足一个条件才能进入**`if-else`**时, 应该把**`if-else`**抽成一个模块.
 
 比如:
 ```objective-c
@@ -668,7 +657,7 @@ NSArray *nameArray = @[@"小明",@"小红",@"小王"];
 }
 ```
 ---
-1. 在使用**`if-else`**时必须加`"{}"`符号, 哪怕是一行判断.
+* 在使用**`if-else`**时必须加`"{}"`符号, 哪怕是一行判断.
 
 比如:
 ```objective-c
@@ -702,7 +691,7 @@ NSArray *nameArray = @[@"小明",@"小红",@"小王"];
 ---
 ## For-In & For 规范
 
-1. 在**`"for(for-in)"`**中, 里面的参数必须严格按照上文所示的**`实例规范`**来声明, 且是兼容64位的类型.
+* 在**`"for(for-in)"`**中, 里面的参数必须严格按照上文所示的**`实例规范`**来声明, 且是兼容64位的类型.
 
 比如:
 ``` objective-c
@@ -725,7 +714,7 @@ NSArray *nameArray = @[@"小明",@"小红",@"小王"];
 }
 ```
 ---
-1. 当函数中需要使用到**`"for(for-in)"`**, 如果该**`"for(for-in)"`**是在函数的第一句, 必须和上文的**`"if-else"`**一样空行, 与**`return`**语句可不空行.
+* 当函数中需要使用到**`"for(for-in)"`**, 如果该**`"for(for-in)"`**是在函数的第一句, 必须和上文的**`"if-else"`**一样空行, 与**`return`**语句可不空行.
 
 比如:
 ``` objective-c
@@ -746,7 +735,7 @@ NSArray *nameArray = @[@"小明",@"小红",@"小王"];
 ```
 ---
 ## Block规范
-1. 在函数中使用到**`Block`**时, 与**`if-else`**或者**`for-in`**不太一样, **`Block`**第一行与代码块必须得空行, 无论方法是否是系统自带的.
+* 在函数中使用到**`Block`**时, 与**`if-else`**或者**`for-in`**不太一样, **`Block`**第一行与代码块必须得空行, 无论方法是否是系统自带的.
 
 比如:
 ```objective-c
@@ -770,7 +759,7 @@ NSArray *nameArray = @[@"小明",@"小红",@"小王"];
 ---
 ## 运算符规范
 
-1. 一元运算符和参数之间不放置空格, 比如**`"!"`**非运算符, **`"&"`**安位与, **`"|"`**安位或.
+* 一元运算符和参数之间不放置空格, 比如**`"!"`**非运算符, **`"&"`**安位与, **`"|"`**安位或.
 
 比如: 
 ``` objective-c
@@ -789,7 +778,7 @@ BOOL isClose=!isOpen;
 ```
 ---
 
-1. 二元运算符和参数之间要有空格, 如赋值号**`"="`**左右各留一个空格.
+* 二元运算符和参数之间要有空格, 如赋值号**`"="`**左右各留一个空格.
 
 比如: 
 ``` objective-c
@@ -801,7 +790,7 @@ self.myString = @“mySring”;
 self.myString=@"myString";
 ```
 ---
-1. 三目运算符和参数之间必须得有空格, 如判断符**`"?"`**结果符**`":"`**
+* 三目运算符和参数之间必须得有空格, 如判断符**`"?"`**结果符**`":"`**
 
 比如:
 ``` objective-c
@@ -814,9 +803,11 @@ NSInteger userAge = @"Man"?18:19;
 ---
 # 命名规范
 
+
+
 ## 实例命名规范
 
-1. 使用完整的英文描述来准确描述**`Variable /Class /Define /Notes`**, 禁止使用拼音命名, 不建议建议使用缩写.
+* 使用完整的英文描述来准确描述**`Variable /Class /Define /Notes`**, 禁止使用拼音命名, 不建议建议使用缩写.
 
 比如:
 ``` objective-c
@@ -827,7 +818,7 @@ NSString *userName = @"小明";
 NSString *uName = @"小明";
 ```
 ---
-1. 使用本行业的专业术语, 如果是消费者的话就要使用消费者对应的名词, 用户的话就使用用户对应的名词, 并且以**`“=”`**对齐, 禁止夸域命名. 
+* 使用本行业的专业术语, 如果是消费者的话就要使用消费者对应的名词, 用户的话就使用用户对应的名词, 并且以**`“=”`**对齐, 禁止夸域命名. 
 
 比如:
 ``` objective-c
@@ -842,7 +833,7 @@ NSInteger uAge  = 18;
 CGFloat uHeight = 170.5f;
 ```
 ---
-1. 使用**`Apple`**推荐的驼峰命名方式来编写代码, 方法开头第一个字母必须小写(特殊命名除外), 禁止使用随性的命名方式.
+* 使用**`Apple`**推荐的驼峰命名方式来编写代码, 方法开头第一个字母必须小写(特殊命名除外), 禁止使用随性的命名方式.
 
 比如:
 ``` objective-c
@@ -856,7 +847,7 @@ CGFloat uHeight = 170.5f;
 ---
 ## @Property命名规范
 
-1. 尽量少用缩写, 使用**`Apple`**推荐的短句命名法命名且第一个字母必须小写, 这样子做, 可以省略再注释处理.
+* 尽量少用缩写, 使用**`Apple`**推荐的短句命名法命名且第一个字母必须小写, 这样子做, 可以省略再注释处理.
 
 比如:
 ``` objective-c
@@ -874,7 +865,7 @@ CGFloat uHeight = 170.5f;
 ---
 ## @Interface->class命名规范
 
-1.	尽量使用有意义的英文名字命名, 拒绝使用**`"i"`**,  **`"j"`**等无意义的字符命名, 类的命名首字母大写,  其他变量的命名首字符小写.
+* 尽量使用有意义的英文名字命名, 拒绝使用**`"i"`**,  **`"j"`**等无意义的字符命名, 类的命名首字母大写,  其他变量的命名首字符小写.
 
 比如:
 ```objective-c
@@ -886,15 +877,41 @@ CGFloat uHeight = 170.5f;
 @interface people : SuperClassName
 @end
 ```
+
+
 ```objective-c
 @interface ren : SuperClassName
 @end
 ```
 
+
+
 ---
+## #Define命名规范
+
+* 使用**`#define`**定义预编译宏时, 应当把宏定义成全部大写字母, 且与**`“_”`**分隔, 此方法是苹果官方所推荐.
+
+比如:
+
+```objective-c
+#define NS_AVAILABLE(_mac, _ios) CF_AVAILABLE(_mac, _ios)
+#define NS_AVAILABLE_MAC(_mac) CF_AVAILABLE_MAC(_mac)
+#define NS_AVAILABLE_IOS(_ios) CF_AVAILABLE_IOS(_ios)
+```
+
+错误写法:
+
+```objective-c
+#define kCancelBottom  25
+#define kCancelHeight  44
+#define kCancelMargins 25
+```
+
+---
+
 ## Block命名规范
 
-1.尽量使用有意义的命名方法, 禁止使用简称去命名.
+* 尽量使用有意义的命名方法, 禁止使用简称去命名.
 
 比如:
 ```objective-c
@@ -907,7 +924,7 @@ CGFloat uHeight = 170.5f;
 ---
 ## For-In命名规范
 
-1.在使用快速遍历**`for-in`**时, 其中的参数需要根据对应的元素进行一一对应来命名.
+* 在使用快速遍历**`for-in`**时, 其中的参数需要根据对应的元素进行一一对应来命名.
 
 比如:
 ```objective-c
@@ -939,7 +956,7 @@ for (id abc in numberArray) {
 ---
 # 布局框架
 
-@(AutoLayout)[Masonry]
+
 
 ---
 * 在项目开发中,  我们经常会遇到`View`需要布局的情况, 通常我们会使用`frame`, `size`, `center`, `bounds`等属性去给`View`布局, 而且还需要我们给每个设备的屏幕一一对应的适配计算, 界面布局所花的代码量等同于业务的三分之一, 而且还不容易理解.
@@ -952,9 +969,8 @@ for (id abc in numberArray) {
 
 ---
 # 文件夹层次结构
-@(Project Framework)[MVVM]
 
----
+
 ## MVC架构
 
 `MVC`是一种使用`MVC(Model View Controller 模型-视图-控制器)`, 有几大优点：
@@ -976,10 +992,6 @@ for (id abc in numberArray) {
 > * **视图对模型数据的低效率访问:** 依据模型操作接口的不同，视图可能需要多次调用才能获得足够的显示数据。对未变化数据的不必要的频繁访问，也将损害操作性能。
 > * **一般高级的界面工具或构造器不支持模式:** 改造这些工具以适应`MVC`需要和建立分离的部件的代价是很高的，会造成`MVC`使用的困难。
 
-
-
-
-
 ---
 ## MVVM架构
 
@@ -990,8 +1002,6 @@ for (id abc in numberArray) {
 > * **独立开发**。开发人员可以专注于业务逻辑和数据的开发`ViewModel`，设计人员可以专注于页面设计，使用`Expression Blend`可以很容易设计界面并生成`XAML`代码。
 > * **可测试**。界面素来是比较难于测试的，而现在测试可以针对`ViewModel`来写。
 > * **结构**。通常`MVVM`架构图如图所示, 且开头首字母为大写
-
-![5](./文件夹架构.001.png)
 
 
 
