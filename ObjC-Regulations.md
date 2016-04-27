@@ -1,6 +1,5 @@
 # iOS学习：iOS代码规范
-[![iOS开发小技巧]
-[![Objective-C, Masonry, Standard, MVC, MVVM]
+[![iOS开发小技巧: 代码规范]
 
 ---
 
