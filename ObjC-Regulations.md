@@ -1,48 +1,23 @@
-# iOS学习：iOS代码规范
+# Objective-C规范
 
 ---
 
-### 目录
-- [作者感言](#作者感言)
+## 目录
 - [阅读前言](#阅读前言)
-- [iOS代码规范](#iOS代码规范)
+- [Objective-C语言规范](#Objective-C语言规范)
 - [命名规范](#命名规范)
 - [布局框架](#布局框架)
 - [文件夹层次结构](#文件夹层次结构)
 
-# 作者感言
+---
+## 阅读前言
 
-> 这篇文章, 部分是收集了网上的iOS开发爱好者的代码规范, 以及我自己的理解, 不一定完全满足所有人, 希望多多见谅, 也同样感谢支持我完成这篇文章的朋友.
->
-> 刚开始写这篇文章的时候, 我无从下手, 直到我朋友给了我一份JAVA的开发文档规范, 我才慢慢有了清晰的思路, 中间迭代了许多版本, 一次次的修改文章的排版, 关键字的高亮, 以及代码的高亮.
->
-> 一点点的编写, 一次次的修改, 让我对代码规范有了更深刻的理解, 曾经有人说过, 印度人写代码, 100个人所写的, 看起来像一个人所写的, 不是说印度阿三开挂了, 是他们遵循了一个规范, 无规矩不成方圆, 也就是这个道理.
-
-
-
-> **最后:**
-> **如果你有更好的建议或者对这篇文章有不满的地方, 请联系我, 我会参考你们的意见再进行修改, 联系我时, 请备注`iOS代码规范文档`, 祝大家学习愉快~谢谢~**
-
-联系方式:
-
-* **Cain(罗家辉)**
-
-
-* **联系方式:** zhebushimengfei@qq.com
-
-
-* **腾讯QQ:** 350116542
+* 在阅读代码规范之前，建议你安装<**[XAlign](https://github.com/qfish/XAlign)**, **[VVDocumenter](https://github.com/onevcat/VVDocumenter-Xcode)**>这两个插件，会让你的代码变得清晰。
 
 ---
-# 阅读前言
+## Objective-C语言规范
 
-* 在阅读代码规范之前，必须先去下载两个插件<**[XAlign](https://github.com/qfish/XAlign)**, **[VVDocumenter](https://github.com/onevcat/VVDocumenter-Xcode)**>。
-* 文档的目的是描述一些关于iOS编程的标准和惯例，并指导编写稳定的iOS代码。这些都是基于健全的、充分证明过的软件工程基础上的，并使得代码容易理解、维护和增。更重要的是，遵循这些规则，iOS开发人员的编程效率将会显著的得到提高。因为不必花费时间来重新编写代码，而是更容易的在开发过程中，对代码进行修改。最后，遵循这些规则，可以保持代码的连续性和粘性，提升开发组的效率。
-
----
-# iOS代码规范
-
-## #Import规范
+### #Import规范
 
 1. 当一个**`Controller`**或者一个**`Class`**中需要用到不同的类和**`Define`**时, 我们应当把**`#import`**划分.
 
@@ -64,7 +39,7 @@
 ```
 ---
 
-## #Define规范
+### #Define规范
 
 * 使用**`#define`**时, 必须要以数值对齐.
 
@@ -124,7 +99,7 @@
 }
 ```
 ---
-## #Paragma Mark 规范
+### #Paragma Mark 规范
 
 * 使用**`#pragma mark`**时紧挨着方法名, 且与上一个方法的间距为1空行.
 
@@ -192,7 +167,7 @@
 - (void)someMothedThree;
 ```
 ---
-## @Interface规范
+### @Interface规范
 
 * 当**`@interface`**里声明了许多**`Delegate`**, **`DataSource`**, **`Protocol`**方法时, 我们需要在**`“Class Name()”`**及**`“,”`**后空一格, 且以第一个**`Delegate(DataSource或Protocol)`**方法名对齐, 建议在4~5个之后就换行.
 
@@ -253,7 +228,7 @@ interface AspEasyOwnResetPasswordViewController()<UITextFieldDelegate,MBAlertVie
 ```
 
 ---
-## @implementation规范
+### @implementation规范
 
 * 禁止使用**`@synthesize`**关键字, **`@property`**已经自动帮我们声明了**`Setter`**和**`Getter`**方法, 如有特殊需求可重写**`Setter`**方法, 所以不需要再使用**`@synthesize`**.
 
@@ -269,7 +244,7 @@ interface AspEasyOwnResetPasswordViewController()<UITextFieldDelegate,MBAlertVie
 ```
 
 ---
-## 实例规范
+### 实例规范
 
 * 一个实例变量出现属性赋值时, 如果是以**`“=”`**赋值, 必须以**`“=”`**对齐, 如果以**`“[]”`**赋值, 必须以开头第一个**`“[”`**对齐.
 
@@ -373,7 +348,7 @@ NSString *userName = (NSString*)student;
 NSString *userName = (NSString *) student;
 ```
 ---
-## NSDictionary规范
+### NSDictionary规范
 
 * 当**`NSDictionary`**里的**`Key`** : **`Value`**过多时, 应拆分为多行显示, 并以 **`":"`** 对齐.
 
@@ -389,7 +364,7 @@ NSDictionary *people = @{@"xiaoming":18,@"xiaohong":19,@"xiaowang":20};
 ```
 
 ---
-## NSArray规范
+### NSArray规范
 
 * 当**`NSArray`**里的元素过多时, 应拆分为多行显示, 并以第一个元素对齐.
 
@@ -405,7 +380,7 @@ NSArray *nameArray = @[@"小明",@"小红",@"小王"];
 ```
 
 ---
-## 函数规范
+### 函数规范
 
 * 在声明函数时**`“-”`**与**`“(type)”`**必须空一格, 且后面的参数类型与**`“*”`**也必须空一格.
 
@@ -543,7 +518,7 @@ NSArray *nameArray = @[@"小明",@"小红",@"小王"];
 					    range:(NSRange)otherRange; 
 ```
 ---
-## If-Else规范
+### If-Else规范
 
 * 如果在方法中出现**`if-else`**判断, 我们应该使用结构清晰的排版方式, **`if-else`**语句与方法名空行, 与**`return`**语句可以不用空行.
 
@@ -693,7 +668,7 @@ NSArray *nameArray = @[@"小明",@"小红",@"小王"];
 }
 ```
 ---
-## For-In & For 规范
+### For-In & For 规范
 
 * 在**`"for(for-in)"`**中, 里面的参数必须严格按照上文所示的**`实例规范`**来声明, 且是兼容64位的类型.
 
@@ -738,7 +713,7 @@ NSArray *nameArray = @[@"小明",@"小红",@"小王"];
 }
 ```
 ---
-## Block规范
+### Block规范
 * 在函数中使用到**`Block`**时, 与**`if-else`**或者**`for-in`**不太一样, **`Block`**第一行与代码块必须得空行, 无论方法是否是系统自带的.
 
 比如:
@@ -761,7 +736,7 @@ NSArray *nameArray = @[@"小明",@"小红",@"小王"];
 }
 ```
 ---
-## 运算符规范
+### 运算符规范
 
 * 一元运算符和参数之间不放置空格, 比如**`"!"`**非运算符, **`"&"`**安位与, **`"|"`**安位或.
 
@@ -805,11 +780,9 @@ NSInteger userAge = @"Man" ? 18 : 19;
 NSInteger userAge = @"Man"?18:19;
 ```
 ---
-# 命名规范
+## 命名规范
 
-
-
-## 实例命名规范
+### 实例命名规范
 
 * 使用完整的英文描述来准确描述**`Variable /Class /Define /Notes`**, 禁止使用拼音命名, 不建议建议使用缩写.
 
@@ -849,7 +822,7 @@ CGFloat uHeight = 170.5f;
 - (CGPoint)ConverTPoint:(CGPoint)POINT ToView:(nullable UIView *)view;
 ```
 ---
-## @Property命名规范
+### @Property命名规范
 
 * 尽量少用缩写, 使用**`Apple`**推荐的短句命名法命名且第一个字母必须小写, 这样子做, 可以省略再注释处理.
 
@@ -867,7 +840,7 @@ CGFloat uHeight = 170.5f;
 @property (readonly, assign) CGFloat *uHeight;
 ```
 ---
-## @Interface->class命名规范
+### @Interface->class命名规范
 
 * 尽量使用有意义的英文名字命名, 拒绝使用**`"i"`**,  **`"j"`**等无意义的字符命名, 类的命名首字母大写,  其他变量的命名首字符小写.
 
@@ -891,7 +864,7 @@ CGFloat uHeight = 170.5f;
 
 
 ---
-## #Define命名规范
+### #Define命名规范
 
 * 使用**`#define`**定义预编译宏时, 应当把宏定义成全部大写字母, 且与**`“_”`**分隔, 此方法是苹果官方所推荐.
 
@@ -913,7 +886,7 @@ CGFloat uHeight = 170.5f;
 
 ---
 
-## Block命名规范
+### Block命名规范
 
 * 尽量使用有意义的命名方法, 禁止使用简称去命名.
 
@@ -926,7 +899,7 @@ CGFloat uHeight = 170.5f;
 @property (nonatomic, copy) void(^AspWNRBBlock)(parameter);
 ```
 ---
-## For-In命名规范
+### For-In命名规范
 
 * 在使用快速遍历**`for-in`**时, 其中的参数需要根据对应的元素进行一一对应来命名.
 
@@ -958,7 +931,7 @@ for (id abc in numberArray) {
 }
 ```
 ---
-# 布局框架
+## 布局框架
 
 
 
@@ -972,10 +945,10 @@ for (id abc in numberArray) {
 > **注意: 在工程中禁止使用`Xib`, 禁止在`StoryBoard`拖入任何控件, 且`StoryBoard`只可作为项目架构所使用.**
 
 ---
-# 文件夹层次结构
+## 文件夹层次结构
 
 
-## MVC架构
+### MVC架构
 
 `MVC`是一种使用`MVC(Model View Controller 模型-视图-控制器)`, 有几大优点：
 
@@ -997,7 +970,7 @@ for (id abc in numberArray) {
 > * **一般高级的界面工具或构造器不支持模式:** 改造这些工具以适应`MVC`需要和建立分离的部件的代价是很高的，会造成`MVC`使用的困难。
 
 ---
-## MVVM架构
+### MVVM架构
 
 `MVVM`模式和`MVC`模式一样，主要目的是分离视图`View`和模型`Model`，有几大优点
 
