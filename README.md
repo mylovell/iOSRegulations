@@ -8,9 +8,9 @@
 
 ### Cain
 
-> [Cain（罗家辉）](https://github。com/CainRun)
+> [Cain（罗家辉）](https://github.com/CainRun)
 >
-> Email：zhebushimengfei@qq.com
+> Email：zhebushimengfei@qq.com
 >
 > QQ：350116542
 
