@@ -686,7 +686,6 @@ NSArray *nameArray = @[@"小明",@"小红",@"小王"];
 }
 ```
 ---
-<<<<<<< HEAD
 
 * 在使用**`if-else`**中, **`()`**中的条件, 不需要与左右两边的**`()`**空格, 且**`{}`**与前一个**`)`**空格
 
@@ -743,11 +742,6 @@ NSArray *nameArray = @[@"小明",@"小红",@"小王"];
 
 ---
 ## For-In & For 规范
-=======
-### For-In & For 规范
->>>>>>> origin/master
-
-
 
 * 当函数中需要使用到**`"for(for-in)"`**, 在**`"for(for-in)"`**内, 必须和上文的**`"if-else"`**一样空行, 与**`return`**语句可不空行.
 
@@ -1029,7 +1023,7 @@ NSArray *numberArray = @[@1, @2, @3, @4, @5 , @6, @7, @8, @9];
     
 for (id abc in numberArray) {
         
-	NSLog(@"%@", item);
+	NSLog(@"%@", abc);
 }
 ```
 ---
