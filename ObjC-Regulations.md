@@ -169,19 +169,19 @@
 ---
 ### @Interface规范
 
-* 当**`@interface`**里声明了许多**`Delegate`**, **`DataSource`**, **`Protocol`**方法时, 我们需要在**`“Class Name()”`**及**`“,”`**后空一格, 且以第一个**`Delegate(DataSource或Protocol)`**方法名对齐, 建议在4~5个之后就换行.
+* 在**`@Interface`**里遵循的**`Delegate`**, 或者是**`DataSource`**方法, 必须以**`,`**间隔, 且空一格.
 
 比如:
 
 ```objective-c
-interface AspEasyOwnResetPasswordViewController()<UITextFieldDelegate, MBAlertViewDelegate, UITableViewDelegate, UITableViewDataSource, 
-UITextViewDelegate>
+@interface AspEasyOwnResetPasswordViewController () <UITextFieldDelegate, MBAlertViewDelegate, UITableVIewDelegate, UITextViewDelegate, UIAlertViewDelegate, UITableViewDataSource>
+
 ```
 
 
 错误写法:
 ```objective-c
-interface AspEasyOwnResetPasswordViewController()<UITextFieldDelegate,MBAlertViewDelegate>
+@interface AspEasyOwnResetPasswordViewController()<UITextFieldDelegate,MBAlertViewDelegate>
 ```
 ---
 * 当我们在**`@interface`**里声明变量时, 我们应该根据内存管理关键字来划分模块, 且以 **`“*”`** 分类对齐(基础数据类型除外).
@@ -193,8 +193,8 @@ interface AspEasyOwnResetPasswordViewController()<UITextFieldDelegate,MBAlertVie
 @property (nonatomic, strong) AspRetrievePasswordView *retrievePassword;
 @property (nonatomic, strong) UITextField             *foucsTextField;
 
-@property (nonatomic, copy  ) NSString *brandName;
-@property (nonatomic, copy  ) NSString *brandType;
+@property (nonatomic, copy) NSString *brandName;
+@property (nonatomic, copy) NSString *brandType;
 
 @property (nonatomic, assign) NSTimer *timer;
 
@@ -261,40 +261,29 @@ interface AspEasyOwnResetPasswordViewController()<UITextFieldDelegate,MBAlertVie
 ```
 错误写法:
 ```objective-c
-- (id) initWithFrame:(CGRect)frame {
+- (void)setTextFieldDelegate:(id<UITextFieldDelegate>)textFieldDelegate {
     
-    self = [super initWithFrame:frame];
-   	if ( self )
-   	{
-  	   [self setBackgroundColor:TRAFFICDETAILBACGROUNDCOLOR];
-        
-		if ( !_ItemBtns ) {
-   	       _ItemBtns = [[NSMutableArray alloc] init] ;
-   	    }
-   	    _mnScrollViewWidth = kWidthToFit(94); 
-  	    self.colorNoSel = UIColorFromRGB(0xdee6ea) ;
-   	    self.colorSel = UIColorFromRGB(0xcdd0d2) ;
-        
-   	    [self addSubview:self.navScrollView];
-	}
-    
-	return self;
+    self.phoneTextFieldOne.delegate = textFieldDelegate;
+	self.phoneTextFieldTwo.delegate = textFieldDelegate;
+    self.phoneTextFieldThree.delegate = textFieldDelegate;
+    self.reviewPassword.delegate = textFieldDelegate;
+    self.confirmPassword.delegate = textFieldDelegate;
 }
 ```
 
 ---
-* 当出现多个实例变量时, 应该使用代码块的思想**`(特殊情况除外)`**, 把它们组成一个模块一个模块.
+* 当出现多个实例变量时, 应该使用代码块的思想, 把它们组成一个模块一个模块**`(特殊情况除外)比如需要局部声明的AVFoundation`**.
 
 比如:
 
 ```objective-c
-- (void)someMethod {
-  
-	Person *person = [[Person alloc] init];
-  	person.name    = @"xiaoming";
-  	person.age	   = 17;
-  
-	Car *newCar = [[Car alloc] init];
+- (void)customFunction {
+
+    Person *person = [[Person alloc] init];
+    person.name    = @"xiaoming";
+    person.age     = 17;
+
+    Car *newCar = [[Car alloc] init];
     newCar.name = @"保时捷";
 }
 ```
@@ -302,14 +291,14 @@ interface AspEasyOwnResetPasswordViewController()<UITextFieldDelegate,MBAlertVie
 错误写法:
 
 ```objective-c
-- (void)someMethod {
-  
-	Person *person = [[Person alloc] init];
-  	person.name    = @"xiaoming";
-  	person.age	   = 17;
-	Car *newCar = [[Car alloc] init];
+- (void)customFunction {
+
+    Person *person = [[Person alloc] init];
+    person.name    = @"xiaoming";
+    person.age     = 17;
+    Car *newCar = [[Car alloc] init];
     newCar.name = @"保时捷";
-}
+}}
 ```
 
 
@@ -319,19 +308,17 @@ interface AspEasyOwnResetPasswordViewController()<UITextFieldDelegate,MBAlertVie
 
 比如:
 ```objective-c
-- (void)itemBtnSel:(NSInteger)nIndex {
-    
-	self.nCurrentIndex = nIndex;
-    
-	[_delegate itemDidSelectedWithIndex:_nCurrentIndex];
+- (void)customFunction:(NSString *)someName {
+
+	self.userName = someName;    
 }
 ```
 
 错误写法:
 ```objective-c
-- (void) ItemBtnSel:(NSInteger) nIndex {
-	self.nCurrentIndex = nIndex ;
-	[_delegate itemDidSelectedWithIndex:_nCurrentIndex] ;
+- (void)customFunction:(NSString *)someName {
+
+	self.userName = someName ;
 }
 ```
 
@@ -386,20 +373,23 @@ NSArray *nameArray = @[@"小明",@"小红",@"小王"];
 
 比如:
 ```objective-c
-- (void)ItemBtnSel:(NSInteger)nIndex {
+- (void)customFunction {
     
-	self.nCurrentIndex = nIndex;
-    
-	[_delegate itemDidSelectedWithIndex:_nCurrentIndex];
+    // Code Body
 }
 ```
 错误写法:
 ```objective-c
--(void) ItemBtnAction:(UIButton*)button {
+-(void)customFunction {
     
-	self.nCurrentIndex = [_ItemBtns indexOfObject:button];
+    // Code Body
+}
+```
+
+```objective-c
+-(void) customFunction {
     
-	[_delegate itemDidSelectedWithIndex:_nCurrentIndex];
+    // Code Body
 }
 ```
 
@@ -416,7 +406,7 @@ NSArray *nameArray = @[@"小明",@"小红",@"小王"];
 	return self;
 }
 
-- (void)someMethod {
+- (void)customFunction {
 	//Code Body
 }
 ```
@@ -429,7 +419,7 @@ NSArray *nameArray = @[@"小明",@"小红",@"小王"];
 	}    
 	return self;
 }
-- (void)someMethod {
+- (void)customFunction {
 	//Code Body
 }
 ```
@@ -444,7 +434,7 @@ NSArray *nameArray = @[@"小明",@"小红",@"小王"];
 
 
 
-- (void)someMethod {
+- (void)customFunction {
 	//Code Body
 }
 ```
@@ -461,9 +451,9 @@ NSArray *nameArray = @[@"小明",@"小红",@"小王"];
 ```
 错误写法:
 ```objective-c
-- (void)someMethod {}
+- (void)customFunction {
 
-	[self someMethod];
+	[self customFunction];
 }
 ```
 
@@ -472,7 +462,7 @@ NSArray *nameArray = @[@"小明",@"小红",@"小王"];
 
 比如:
 ```objective-c
-- (void *)mineViewModel {
+- (void)mineViewModel {
 
 	//Custom Function
 }
@@ -483,7 +473,7 @@ NSArray *nameArray = @[@"小明",@"小红",@"小王"];
 ```
 错误写法:
 ```objective-c
-- (void *)mineViewModel {
+- (void)mineViewModel {
 	//Custom Function
 }
 
@@ -517,6 +507,33 @@ NSArray *nameArray = @[@"小明",@"小红",@"小王"];
 		 withObjectsFromArray:(NSArray<ObjectType> *)otherArray 
 					    range:(NSRange)otherRange; 
 ```
+错误写法
+
+```objective-c
+- (void)replaceObjectsInRange:(NSRange)range withObjectsFromArray:(NSArray<ObjectType> *)otherArray range:(NSRange)otherRange;
+```
+
+---
+
+如果实现的是空函数体, 那么就不需要空格.
+
+比如:
+
+``` objective-c
+- (void)showView {}
+```
+错误写法:
+``` objective-c
+- (void)showView {
+}
+```
+``` objective-c
+- (void)showView {
+
+}
+```
+
+
 ---
 ### If-Else规范
 
@@ -603,7 +620,7 @@ NSArray *nameArray = @[@"小明",@"小红",@"小王"];
 }
 ```
 
-* 合理使用**`if-else`**, 当某个场景只需满足一个条件才能进入**`if-else`**时, 应该把**`if-else`**抽成一个模块.
+* 合理使用**`if-else`**, **`当某个场景只需满足一个条件`**才能进入**`if-else`**时, 应该把**`if-else`**抽成一个模块.
 
 比如:
 ```objective-c
@@ -636,11 +653,11 @@ NSArray *nameArray = @[@"小明",@"小红",@"小王"];
 }
 ```
 ---
-* 在使用**`if-else`**时必须加`"{}"`符号, 哪怕是一行判断.
+* 在使用**`if-else`**时必须加**`"{}"`**符号, 如果存在**`else`**时, 必须加**`{}`**
 
 比如:
 ```objective-c
-- (void)someMethod {
+- (void)customFunction {
 	
 	if (Condition) {
 	
@@ -653,14 +670,15 @@ NSArray *nameArray = @[@"小明",@"小红",@"小王"];
 ```
 错误写法:
 ```objective-c
-- (void)someMethod {
+- (void)customFunction {
 	
 	if (Condition) // Code Body
+      
 	else // Code Body
 }
 ```
 ```objective-c
-- (void)someMethod {
+- (void)customFunction {
 	
 	if (Condition) // Code Body
 	
@@ -668,7 +686,90 @@ NSArray *nameArray = @[@"小明",@"小红",@"小王"];
 }
 ```
 ---
+<<<<<<< HEAD
+
+* 在使用**`if-else`**中, **`()`**中的条件, 不需要与左右两边的**`()`**空格, 且**`{}`**与前一个**`)`**空格
+
+比如:
+
+```objective-c
+- (id)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    
+   	if (self){
+   	
+  	   [self setBackgroundColor:TRAFFICDETAILBACGROUNDCOLOR];
+        
+		if (!_ItemBtns) {
+		
+   	       _ItemBtns = [[NSMutableArray alloc] init];
+   	    }
+   	    
+   	    _mnScrollViewWidth = kWidthToFit(94); 
+   	    
+  	    self.colorNoSel = UIColorFromRGB(0xdee6ea);
+   	    self.colorSel   = UIColorFromRGB(0xcdd0d2);
+        
+   	    [self addSubview:self.navScrollView];
+	}
+    
+	return self;
+}
+```
+
+错误写法
+```objective-c
+- (id) initWithFrame:(CGRect)frame {
+    
+    self = [super initWithFrame:frame];
+   	if ( self )
+   	{
+  	   [self setBackgroundColor:TRAFFICDETAILBACGROUNDCOLOR];
+        
+		if ( !_ItemBtns ) {
+   	       _ItemBtns = [[NSMutableArray alloc] init] ;
+   	    }
+   	    _mnScrollViewWidth = kWidthToFit(94); 
+  	    self.colorNoSel = UIColorFromRGB(0xdee6ea) ;
+   	    self.colorSel = UIColorFromRGB(0xcdd0d2) ;
+        
+   	    [self addSubview:self.navScrollView];
+	}
+    
+	return self;
+}
+```
+
+
+---
+## For-In & For 规范
+=======
 ### For-In & For 规范
+>>>>>>> origin/master
+
+
+
+* 当函数中需要使用到**`"for(for-in)"`**, 在**`"for(for-in)"`**内, 必须和上文的**`"if-else"`**一样空行, 与**`return`**语句可不空行.
+
+比如:
+``` objective-c
+- (void)customFunction {
+	  
+	for (NSInteger i = 0; i < 10; i++) {
+	
+		// code body
+	}
+}
+```
+ 错误写法:
+``` objective-c
+- (void)customFunction {
+	for (NSInteger i = 0; i < 10; i++) {
+		// code body
+	}
+}
+```
+---
 
 * 在**`"for(for-in)"`**中, 里面的参数必须严格按照上文所示的**`实例规范`**来声明, 且是兼容64位的类型.
 
@@ -678,6 +779,7 @@ NSArray *nameArray = @[@"小明",@"小红",@"小王"];
     [super viewDidLoad];
     
 	for (NSInteger i = 0; i < 10; i++) {
+      
 		// code body
 	}
 }
@@ -697,16 +799,17 @@ NSArray *nameArray = @[@"小明",@"小红",@"小王"];
 
 比如:
 ``` objective-c
-- (void)someMethod {
+- (void)customFunction {
 	  
 	for (NSInteger i = 0; i < 10; i++) {
+      
 		// code body
 	}
 }
 ```
  错误写法:
 ``` objective-c
-- (void)someMethod {
+- (void)customFunction {
 	for (NSInteger i = 0; i < 10; i++) {
 		// code body
 	}
@@ -718,7 +821,7 @@ NSArray *nameArray = @[@"小明",@"小红",@"小王"];
 
 比如:
 ```objective-c
-- (void)someMethod {
+- (void)customFunction {
         
     [className blockName:^(parameter) {
         
@@ -728,7 +831,7 @@ NSArray *nameArray = @[@"小明",@"小红",@"小王"];
 ```
 错误写法:
 ```objective-c
-- (void)someMethod {
+- (void)customFunction {
         
     [className blockName:^(parameter) {
         // Code Body
@@ -742,17 +845,16 @@ NSArray *nameArray = @[@"小明",@"小红",@"小王"];
 
 比如: 
 ``` objective-c
-BOOL isOpen  = true;
+BOOL isOpen  = YES;
 BOOL isClose = !isOpen;
 ```
 错误写法:
 ``` objective-c
-BOOL isOpen  = true;
+BOOL isOpen  = YES;
 BOOL isClose = ! isOpen;
 ```
-<dr>
 ``` objective-c
-BOOL isOpen=true;
+BOOL isOpen=YES;
 BOOL isClose=!isOpen;
 ```
 ---
@@ -892,11 +994,11 @@ CGFloat uHeight = 170.5f;
 
 比如:
 ```objective-c
-@property (nonatomic, copy) void(^AspWebNavigationRightBtnBlock)(parameter);
+@property (nonatomic, copy) void(^aspWebNavigationRightBtnBlock)(parameter);
 ```
 错误写法:
 ```objective-c
-@property (nonatomic, copy) void(^AspWNRBBlock)(parameter);
+@property (nonatomic, copy) void(^aspWNavRBBlock)(parameter);
 ```
 ---
 ### For-In命名规范
