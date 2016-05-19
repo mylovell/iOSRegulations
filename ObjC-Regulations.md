@@ -533,7 +533,6 @@ NSArray *nameArray = @[@"小明",@"小红",@"小王"];
 }
 ```
 
-
 ---
 ### If-Else规范
 
@@ -739,9 +738,8 @@ NSArray *nameArray = @[@"小明",@"小红",@"小王"];
 }
 ```
 
-
 ---
-## For-In & For 规范
+### For-In & For 规范
 
 * 当函数中需要使用到**`"for(for-in)"`**, 在**`"for(for-in)"`**内, 必须和上文的**`"if-else"`**一样空行, 与**`return`**语句可不空行.
 
@@ -876,6 +874,46 @@ NSInteger userAge = @"Man" ? 18 : 19;
 NSInteger userAge = @"Man"?18:19;
 ```
 ---
+### NS_Enum规范
+
+* 在使用**`NS_Enum`**时, 里面的枚举类型不能为空, 否则编译器没法通过
+
+比如:
+```objective-c
+typedef NS_ENUM(NSInteger, EnumType){
+	EnumTypeOne,
+};
+```
+---
+
+* 在使用**`NS_Enum`**时, 前缀建议带上**`typedef`**
+
+比如:
+```objective-c
+typedef NS_ENUM(NSInteger, EnumType){
+	EnumTypeOne,
+};
+```
+
+---
+* 和**`Enum`**一样, 每个枚举类型都必须以**`,`**且换行分隔
+
+比如:
+```objective-c
+typedef NS_ENUM(NSInteger, EnumType){
+	EnumTypeOne,
+	EnumTypeTwo,
+};
+```
+
+错误写法:
+```objective-c
+typedef NS_ENUM(NSInteger, EnumType){
+	EnumTypeOne, EnumTypeTwo,
+};
+```
+
+
 ## 命名规范
 
 ### 实例命名规范
@@ -1027,11 +1065,54 @@ for (id abc in numberArray) {
 }
 ```
 ---
+### NS_Enum命名规范
+
+1. 在命名**`NS_Enum`**时, 应当用正确的命名来声明, 且以驼峰命名, 首字母大写
+
+比如:
+```objective-c
+typedef NS_ENUM(NSInteger, HumanType) {
+	YellowMan,
+	WhiteMan,
+	BlackMan
+};
+```
+
+错误写法:
+```objective-c
+typedef NS_ENUM(NSInteger, HumanType) {
+	yellowMan,
+	whiteMan,
+	blackMan
+};
+```
+
+```objective-c
+typedef NS_ENUM(NSInteger, HumanType) {
+	yellowman,
+	whiteman,
+	blackman
+};
+```
+
+```objective-c
+typedef NS_ENUM(NSInteger, HumanType) {
+	yellow,
+	white,
+	black
+};
+```
+```objective-c
+typedef NS_ENUM(NSInteger, HumanType) {
+	Yellow,
+	White,
+	Black
+};
+```
+---
+
 ## 布局框架
 
-
-
----
 * 在项目开发中,  我们经常会遇到`View`需要布局的情况, 通常我们会使用`frame`, `size`, `center`, `bounds`等属性去给`View`布局, 而且还需要我们给每个设备的屏幕一一对应的适配计算, 界面布局所花的代码量等同于业务的三分之一, 而且还不容易理解.
 
 * 但这个问题在2011之后就已经被解决了, 当时`Apple`引用了`Cassowary constraint-solving`算法, 并将这个算法命名为`AutoLayout`, 可以在绝大多数的情况下, 完美的解决屏幕适配的问题, 而且`AutoLayout`的黑魔法还不止于此, 想知道更多的同学可以去查查资料**[AutoLayout](http://www.starming.com/index.php?v=index&view=84)**, 了解更多的黑魔法.
